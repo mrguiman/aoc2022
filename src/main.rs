@@ -5,6 +5,7 @@ mod day2;
 mod day3;
 mod day4;
 mod day5;
+mod day6;
 
 fn parse_full_input(path: &str) -> Result<String, FromUtf8Error> {
     String::from_utf8(fs::read(path).unwrap())
@@ -37,5 +38,12 @@ fn main() {
         "Day5: {:?}, {:?}",
         day5::get_part1_answer(&day5_input),
         day5::get_part2_answer(&day5_input)
+    );
+
+    let day6_input = parse_full_input("assets/day6_puzzle1_input.txt").unwrap();
+    println!(
+        "Day6: {:?}, {:?}",
+        day6::get_part1_answer(&day6_input),
+        day6::get_part2_answer(&day6_input)
     );
 }
