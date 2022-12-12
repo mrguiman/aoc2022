@@ -11,25 +11,22 @@ fn apply_move(pos: (i32, i32), move_str: &str) -> (i32, i32) {
 }
 
 fn adjust_following_knot(head_knot: &(i32, i32), following_knot: &mut (i32, i32)) {
-    match head_knot.0 - following_knot.0 {
-        2 => {
-            *following_knot = (following_knot.0 + 1, head_knot.1);
-        }
-        -2 => {
-            *following_knot = (following_knot.0 - 1, head_knot.1);
-        }
-        _ => (),
-    };
+    let x_delta = head_knot.0 - following_knot.0;
+    let y_delta = head_knot.1 - following_knot.1;
+    let mut x_move = 0;
+    let mut y_move = 0;
 
-    match head_knot.1 - following_knot.1 {
-        2 => {
-            *following_knot = (head_knot.0, following_knot.1 + 1);
-        }
-        -2 => {
-            *following_knot = (head_knot.0, following_knot.1 - 1);
+    match (x_delta.abs(), y_delta.abs()) {
+        (0, 2) => y_move = 1 * y_delta.signum(),
+        (2, 0) => x_move = 1 * x_delta.signum(),
+        (2, 2) | (2, 1) | (1, 2) => {
+            x_move = 1 * x_delta.signum();
+            y_move = 1 * y_delta.signum();
         }
         _ => (),
-    };
+    }
+
+    *following_knot = (following_knot.0 + x_move, following_knot.1 + y_move);
 }
 
 pub fn get_part1_answer(input: &str) -> String {
@@ -77,8 +74,6 @@ pub fn get_part2_answer(input: &str) -> String {
                 for i in 0..knots.len() - 1 {
                     adjust_following_knot(&knots[i].clone(), &mut knots[i + 1]);
                 }
-
-                dbg!(&knots);
                 tail_visit_positions.insert(knots[knots.len() - 1].clone());
             }
         });
