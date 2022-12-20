@@ -3,6 +3,7 @@ use std::{fs, string::FromUtf8Error};
 mod day1;
 mod day10;
 mod day11;
+mod day12;
 mod day2;
 mod day3;
 mod day4;
@@ -82,5 +83,11 @@ fn main() {
         "Day11: {:?}, {}",
         day11::get_part1_answer(&day11_input),
         day11::get_part2_answer(&day11_input)
+    );
+    let day12_input = parse_full_input("assets/day12_puzzle_input.txt").unwrap();
+    println!(
+        "Day12: {:?}, {}",
+        day12::get_part1_answer(&day12_input),
+        day12::get_part2_answer(&day12_input)
     );
 }
