@@ -1,4 +1,3 @@
-use std::cmp;
 use std::collections::HashSet;
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq)]
@@ -36,16 +35,18 @@ fn get_target_nodes(input: &str) -> (Node, Node) {
         )
 }
 
+fn translate_char(char: Option<char>) -> Option<char> {
+    match char {
+        Some('S') => Some('a'),
+        Some('E') => Some('z'),
+        x => x,
+    }
+}
+
 fn get_accessible_neighboors(input: &str, node: &Node) -> Vec<Node> {
     let mut neighboors: Vec<Node> = vec![];
     let last_visible_char_index = input.find('\n').unwrap() - 1;
     let row_length = last_visible_char_index + 2;
-    let current_char = match input.chars().nth(node.index) {
-        Some('S') => Some('a'),
-        Some('z') => Some('E'),
-        Some('E') => Some('z'),
-        x => x,
-    };
 
     if node.x > 0 {
         neighboors.push(Node::new(node.index - 1, row_length));
@@ -63,10 +64,9 @@ fn get_accessible_neighboors(input: &str, node: &Node) -> Vec<Node> {
     neighboors
         .into_iter()
         .filter(|target_node| {
-            let diff = (input.chars().nth(target_node.index).unwrap() as u8) as i32
-                - (current_char.unwrap() as u8) as i32;
-
-            diff.abs() <= 1
+            let diff = (translate_char(input.chars().nth(target_node.index)).unwrap() as u8) as i32
+                - (translate_char(input.chars().nth(node.index)).unwrap() as u8) as i32;
+            diff <= 1
         })
         .collect::<Vec<Node>>()
 }
@@ -75,13 +75,10 @@ pub fn get_part1_answer(input: &str) -> String {
     let (start, end) = get_target_nodes(input); // could probably do without crawling the entire input to find start and end beforehand
     let mut nodes_to_explore: Vec<(Node, u32)> = Vec::from([(start.clone(), 0)]);
     let mut explored_nodes: HashSet<Node> = HashSet::new();
-    let mut shortest_distance_to_end = u32::MAX;
 
     while let Some((node, distance)) = nodes_to_explore.pop() {
-        dbg!(&node, &distance);
         if node == end {
-            shortest_distance_to_end = cmp::min(shortest_distance_to_end, distance);
-            break;
+            return distance.to_string();
         }
         if explored_nodes.contains(&node) {
             continue;
@@ -100,7 +97,7 @@ pub fn get_part1_answer(input: &str) -> String {
         nodes_to_explore.sort_by(|(_, a), (_, b)| b.cmp(a));
     }
 
-    shortest_distance_to_end.to_string()
+    String::from("Couldn't find the end, sorry")
 }
 pub fn get_part2_answer(_input: &str) -> String {
     String::new()
