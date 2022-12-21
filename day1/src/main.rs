@@ -1,8 +1,8 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-pub fn get_answer() -> String {
-    let file = File::open("assets/day1_puzzle1_input.txt").unwrap();
+pub fn main() {
+    let file = File::open("day1/input").unwrap();
     let f = BufReader::new(file);
     let mut max_calories: Vec<i32> = vec![0, 0, 0];
     let mut calories_count: i32 = 0;
@@ -24,8 +24,8 @@ pub fn get_answer() -> String {
         }
     }
 
-    format!(
-        "Max Calories: {:?}, {}",
+    println!(
+        "Day 1: {:?}, {}",
         max_calories.clone(),
         max_calories.iter().sum::<i32>()
     )

@@ -1,5 +1,6 @@
 use std::cmp;
 use std::collections::HashSet;
+use std::fs;
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq)]
 struct Node {
@@ -160,4 +161,13 @@ pub fn get_part2_answer(input: &str) -> String {
     }
 
     shortest_distance_to_a.to_string()
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day12/input").unwrap()).unwrap();
+    println!(
+        "Day12: {}, {}",
+        get_part1_answer(&input),
+        get_part2_answer(&input)
+    )
 }

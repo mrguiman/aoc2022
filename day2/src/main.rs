@@ -1,3 +1,5 @@
+use std::fs;
+
 #[derive(Eq, PartialEq)]
 enum JankenShape {
     Rock,
@@ -95,4 +97,13 @@ pub fn get_part2_answer(input: &String) -> i32 {
             expected_result.to_score() + expected_shape.to_score()
         })
         .sum::<i32>()
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day2/input").unwrap()).unwrap();
+    println!(
+        "Day2: {}, {}",
+        get_part1_answer(&input),
+        get_part2_answer(&input)
+    )
 }

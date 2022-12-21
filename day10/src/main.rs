@@ -1,3 +1,4 @@
+use std::fs;
 use std::str;
 
 fn map_cycles(input: &str) -> Vec<(u32, i32)> {
@@ -54,4 +55,13 @@ pub fn get_part2_answer(input: &str) -> String {
         .map(|f| format!("{}", f.unwrap()))
         .take(height)
         .fold(String::new(), |acc, str| acc + &str + "\n")
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day10/input").unwrap()).unwrap();
+    println!(
+        "Day10: {}, {}",
+        get_part1_answer(&input),
+        get_part2_answer(&input)
+    )
 }

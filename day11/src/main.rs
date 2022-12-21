@@ -1,4 +1,5 @@
 use std::collections::{HashMap, VecDeque};
+use std::fs;
 
 struct Monkey {
     id: usize,
@@ -188,5 +189,14 @@ pub fn get_part2_answer(input: &str) -> String {
             .take(2)
             .fold(1, |acc, curr| acc * curr)
             .to_string(),
+    )
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day11/input").unwrap()).unwrap();
+    println!(
+        "Day11: {}, {}",
+        get_part1_answer(&input),
+        get_part2_answer(&input)
     )
 }

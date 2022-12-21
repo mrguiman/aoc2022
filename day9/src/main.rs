@@ -1,4 +1,5 @@
 use std::collections::HashSet;
+use std::fs;
 
 fn apply_move(pos: (i32, i32), move_str: &str) -> (i32, i32) {
     match move_str {
@@ -79,4 +80,13 @@ pub fn get_part2_answer(input: &str) -> String {
         });
 
     tail_visit_positions.len().to_string()
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day9/input").unwrap()).unwrap();
+    println!(
+        "Day9: {}, {}",
+        get_part1_answer(&input),
+        get_part2_answer(&input)
+    )
 }

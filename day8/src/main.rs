@@ -1,5 +1,5 @@
-#![allow(unused)]
 use std::cmp;
+use std::fs;
 use std::str;
 
 fn is_tree_visible_in_row(row: &str, tree: u32, tree_index: usize) -> bool {
@@ -125,4 +125,13 @@ pub fn get_part2_answer(input: &str) -> String {
         });
     });
     highest_scenic_score.to_string()
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day8/input").unwrap()).unwrap();
+    println!(
+        "Day8: {}, {}",
+        get_part1_answer(&input),
+        get_part2_answer(&input)
+    )
 }

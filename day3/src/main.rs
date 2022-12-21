@@ -1,3 +1,4 @@
+use std::fs;
 use std::str;
 
 static CHARS: [char; 53] = [
@@ -59,4 +60,13 @@ fn group_by<T: Clone>(vector: Vec<T>, count: usize) -> Vec<Vec<T>> {
         ])
     }
     result
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day3/input").unwrap()).unwrap();
+    println!(
+        "Day3: {}, {}",
+        get_part1_answer(&input),
+        get_part2_answer(&input)
+    )
 }

@@ -1,5 +1,6 @@
 use std::collections::HashSet;
 use std::collections::VecDeque;
+use std::fs;
 use std::hash::Hash;
 
 fn unique_count<T: Hash + Eq>(v: &VecDeque<T>) -> usize {
@@ -30,4 +31,13 @@ pub fn get_part1_answer(input: &str) -> Option<String> {
 }
 pub fn get_part2_answer(input: &str) -> Option<String> {
     get_first_marker_bound(input, 14)
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day6/input").unwrap()).unwrap();
+    println!(
+        "Day6: {}, {}",
+        get_part1_answer(&input).unwrap(),
+        get_part2_answer(&input).unwrap()
+    )
 }

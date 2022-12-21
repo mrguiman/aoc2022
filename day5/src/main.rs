@@ -1,3 +1,4 @@
+use std::fs;
 use std::str;
 
 fn get_relevant_characters(line: &str) -> Vec<String> {
@@ -99,4 +100,13 @@ pub fn get_part1_answer(input: &String) -> String {
 }
 pub fn get_part2_answer(input: &String) -> String {
     get_answer(input, part_2_get_crates_from_stack)
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day5/input").unwrap()).unwrap();
+    println!(
+        "Day5: {}, {}",
+        get_part1_answer(&input),
+        get_part2_answer(&input)
+    )
 }

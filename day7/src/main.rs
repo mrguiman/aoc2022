@@ -1,4 +1,5 @@
 #![allow(unused)]
+use std::fs;
 
 #[derive(Debug, Clone)]
 struct File {
@@ -116,4 +117,13 @@ pub fn get_part2_answer(input: &str) -> String {
     qualifying_sizes.sort();
     qualifying_sizes.reverse();
     qualifying_sizes.pop().unwrap().to_string()
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day7/input").unwrap()).unwrap();
+    println!(
+        "Day7: {}, {}",
+        get_part1_answer(&input),
+        get_part2_answer(&input)
+    )
 }

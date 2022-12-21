@@ -1,4 +1,5 @@
 use std::collections::HashSet;
+use std::fs;
 
 fn parse_section_id(str: &str) -> i32 {
     str::parse::<i32>(str).unwrap()
@@ -45,4 +46,13 @@ pub fn get_part2_answer(input: &String) -> usize {
                 != sets[0].len() + sets[1].len()
         })
         .count()
+}
+
+fn main() {
+    let input = String::from_utf8(fs::read("day4/input").unwrap()).unwrap();
+    println!(
+        "Day4: {}, {}",
+        get_part1_answer(&input),
+        get_part2_answer(&input)
+    )
 }
